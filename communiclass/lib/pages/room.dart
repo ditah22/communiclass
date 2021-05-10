@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'custom_slider_thumb_circle.dart';
 
 class Room extends StatefulWidget {
   @override
@@ -6,6 +7,10 @@ class Room extends StatefulWidget {
 }
 
 class _RoomState extends State<Room> {
+
+  SliderWidget sliderWidget = SliderWidget();
+  double _value = 10;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,17 +23,29 @@ class _RoomState extends State<Room> {
       body: SafeArea(
           child: Column(
             children: [
-              FlatButton.icon(onPressed: () {
-                Navigator.pop(context);
-                Navigator.pop(context);
-                // Navigator.pushNamed(context, '/home');
-              },
-                  icon: Icon(Icons.edit_location),
-                  label: Text("end session")
-              )
+              Center(
+                  child: sliderWidget,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.deepPurple[900],
+                ),
+                child: Text(
+                  "Join room",
+                  style: TextStyle(
+                    fontSize: 17.0,
+                    letterSpacing: 0.8,
+                  ),
+                ),
+              ),
             ],
           )
       ),
     );
   }
 }
+
+
+

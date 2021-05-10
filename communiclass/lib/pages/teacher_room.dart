@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class OpenRoom extends StatefulWidget {
+class TeacherRoom extends StatefulWidget {
   @override
-  _OpenRoomState createState() => _OpenRoomState();
+  _TeacherRoomState createState() => _TeacherRoomState();
 }
 
-class _OpenRoomState extends State<OpenRoom> {
+class _TeacherRoomState extends State<TeacherRoom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[900],
-        title: Text('This is open room screen'),
+        title: Text('This is teacher room screen'),
         centerTitle: true,
         elevation: 0,
       ),
@@ -19,10 +19,12 @@ class _OpenRoomState extends State<OpenRoom> {
           child: Column(
             children: [
               FlatButton.icon(onPressed: () {
-                Navigator.pushNamed(context, '/room');
+                Navigator.pop(context);
+                Navigator.pop(context);
+                // Navigator.pushNamed(context, '/home');
               },
                   icon: Icon(Icons.edit_location),
-                  label: Text("to room screen")
+                  label: Text("end session")
               )
             ],
           )
