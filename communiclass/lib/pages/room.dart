@@ -39,6 +39,9 @@ class _RoomState extends State<Room> {
                   ),
                 ),
               ),
+              Center(
+
+              ),
             ],
           )
       ),
