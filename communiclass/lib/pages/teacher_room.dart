@@ -15,10 +15,29 @@ class _TeacherRoomState extends State<TeacherRoom> {
         centerTitle: true,
         elevation: 0,
       ),
-      backgroundColor: Colors.deepPurple[50],
       body: SafeArea(
           child: Column(
-        children: [presNumber()],
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+            presNumber(),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: ElevatedButton(onPressed: () {
+                Navigator.pushNamed(context, '/teacher_room');
+              },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.deepPurple[900],
+                ),
+                child: Text(
+                  "Create room",
+                  style: TextStyle(
+                    fontSize: 17.0,
+                    letterSpacing: 0.8,
+                  ),
+                ),
+              ),
+            ),
+        ],
       )),
     );
   }
@@ -31,7 +50,7 @@ class presNumber extends StatefulWidget {
 
 class _presNumberState extends State<presNumber> {
   double average = 10;
-  String roomName = "temp";
+  String roomName = "ROOM NAME";
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +64,8 @@ class _presNumberState extends State<presNumber> {
               style: TextStyle(
                 color: Colors.deepPurple[800],
                 letterSpacing: 2.0,
-                fontSize: 50.0,
+                fontSize: 40.0,
                 fontWeight: FontWeight.bold,
-
               ),
               textAlign: TextAlign.center,
             ),
@@ -61,14 +79,12 @@ class _presNumberState extends State<presNumber> {
                 letterSpacing: 2.0,
                 fontSize: 35.0,
                 fontWeight: FontWeight.bold,
-
               ),
               textAlign: TextAlign.center,
             ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 0.0),
-
             child: Text(
               '$average',
               style: TextStyle(
@@ -79,7 +95,7 @@ class _presNumberState extends State<presNumber> {
               ),
               textAlign: TextAlign.center,
             ),
-          )
+          ),
         ],
       ),
     );
