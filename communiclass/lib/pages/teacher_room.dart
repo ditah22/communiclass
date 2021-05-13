@@ -17,23 +17,23 @@ class _TeacherRoomState extends State<TeacherRoom> {
       ),
       body: SafeArea(
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
             presNumber(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: ElevatedButton(onPressed: () {
-                    Navigator.pushNamed(context, '/teacher_room');
+                    Navigator.pop(context);
+                    Navigator.pop(context);
                   },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.deepPurple[900],
                     ),
                     child: Text(
-                      "Create room",
+                      "End session",
                       style: TextStyle(
                         fontSize: 17.0,
                         letterSpacing: 0.8,
