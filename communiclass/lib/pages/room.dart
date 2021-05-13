@@ -22,26 +22,13 @@ class _RoomState extends State<Room> {
       body: SafeArea(
           child: Column(
             children: [
-              Center(
-                  child: SliderWidget(),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.deepPurple[900],
-                ),
-                child: Text(
-                  "Join room",
-                  style: TextStyle(
-                    fontSize: 17.0,
-                    letterSpacing: 0.8,
-                  ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0,450,0,0),
+                child: Center(
+                    child: SliderWidget(),
                 ),
               ),
-              Center(
 
-              ),
             ],
           )
       ),
