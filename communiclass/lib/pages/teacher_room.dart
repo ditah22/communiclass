@@ -15,37 +15,36 @@ class _TeacherRoomState extends State<TeacherRoom> {
         centerTitle: true,
         elevation: 0,
       ),
-      body: SafeArea(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          presNumber(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.deepPurple[900],
-                  ),
-                  child: Text(
-                    "End session",
-                    style: TextStyle(
-                      fontSize: 17.0,
-                      letterSpacing: 0.8,
-                    ),
-                  ),
+      presNumber(),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.deepPurple[900],
+              ),
+              child: Text(
+                "End session",
+                style: TextStyle(
+                  fontSize: 17.0,
+                  letterSpacing: 0.8,
                 ),
               ),
-            ],
+            ),
           ),
         ],
-      )),
+      ),
+        ],
+      ),
     );
   }
 }
