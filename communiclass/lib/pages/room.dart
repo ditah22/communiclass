@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'custom_slider_thumb_circle.dart';
+import 'package:communiclass/models/user.dart';
 
 class Room extends StatefulWidget {
+  final User _user;
+
+  Room(this._user);
+
   @override
   _RoomState createState() => _RoomState();
 }
 
 class _RoomState extends State<Room> {
-
-  double _value = 10;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,15 +40,12 @@ class _RoomState extends State<Room> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 0.0),
               child: Center(
-                  child: SliderWidget(),
+                child: SliderWidget(widget._user),
               ),
             ),
-
           ],
         ),
       ),
     );
   }
 }
-
-

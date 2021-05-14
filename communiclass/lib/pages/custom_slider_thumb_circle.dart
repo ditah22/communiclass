@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:communiclass/models/user.dart';
 
 class CustomSliderThumbCircle extends SliderComponentShape {
   final double thumbRadius;
@@ -64,16 +65,13 @@ class CustomSliderThumbCircle extends SliderComponentShape {
 }
 
 class SliderWidget extends StatefulWidget {
-  final double sliderHeight;
-  final int min;
-  final int max;
-  final fullWidth;
+  final double sliderHeight = 48;
+  final int min =1;
+  final int max =10;
+  final fullWidth = false;
+  final User _user;
 
-  SliderWidget(
-      {this.sliderHeight = 48,
-      this.max = 10,
-      this.min = 1,
-      this.fullWidth = false});
+  SliderWidget(this._user);
 
   @override
   _SliderWidgetState createState() => _SliderWidgetState();
@@ -82,8 +80,6 @@ class SliderWidget extends StatefulWidget {
 
 class _SliderWidgetState extends State<SliderWidget> {
   double _value = 1;
-  int max = 10;
-  int min = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -177,10 +173,10 @@ class _SliderWidgetState extends State<SliderWidget> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(0.0, 25.0, 0.0, 0.0),
+          padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
           child: ElevatedButton(onPressed: () {
-            int value  = (min + (max - min) * _value).round();
-            print('$value');
+            int value  = (widget.min + (widget.max - widget.min) * _value).round();
+            print(widget._user.uid);
           },
             style: ElevatedButton.styleFrom(
               primary: Colors.deepPurple[900],
