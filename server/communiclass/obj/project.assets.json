@@ -408,19 +408,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\yaelm\\.nuget\\packages\\": {}
+    "C:\\Users\\Moshe\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\communicalss\\serverSide\\communiclass\\communiclass\\communiclass.csproj",
+      "projectUniqueName": "C:\\sagi\\semester_b\\open_source\\communiclass\\server\\communiclass\\communiclass.csproj",
       "projectName": "communiclass",
-      "projectPath": "D:\\communicalss\\serverSide\\communiclass\\communiclass\\communiclass.csproj",
-      "packagesPath": "C:\\Users\\yaelm\\.nuget\\packages\\",
-      "outputPath": "D:\\communicalss\\serverSide\\communiclass\\communiclass\\obj\\",
+      "projectPath": "C:\\sagi\\semester_b\\open_source\\communiclass\\server\\communiclass\\communiclass.csproj",
+      "packagesPath": "C:\\Users\\Moshe\\.nuget\\packages\\",
+      "outputPath": "C:\\sagi\\semester_b\\open_source\\communiclass\\server\\communiclass\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\yaelm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Moshe\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -477,7 +477,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }
