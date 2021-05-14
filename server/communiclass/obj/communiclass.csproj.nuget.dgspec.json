@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\sagi\\semester_b\\open_source\\communiclass\\server\\communiclass\\communiclass.csproj": {}
+    "D:\\cc\\communiclass\\server\\communiclass\\communiclass.csproj": {}
   },
   "projects": {
-    "C:\\sagi\\semester_b\\open_source\\communiclass\\server\\communiclass\\communiclass.csproj": {
+    "D:\\cc\\communiclass\\server\\communiclass\\communiclass.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\sagi\\semester_b\\open_source\\communiclass\\server\\communiclass\\communiclass.csproj",
+        "projectUniqueName": "D:\\cc\\communiclass\\server\\communiclass\\communiclass.csproj",
         "projectName": "communiclass",
-        "projectPath": "C:\\sagi\\semester_b\\open_source\\communiclass\\server\\communiclass\\communiclass.csproj",
-        "packagesPath": "C:\\Users\\Moshe\\.nuget\\packages\\",
-        "outputPath": "C:\\sagi\\semester_b\\open_source\\communiclass\\server\\communiclass\\obj\\",
+        "projectPath": "D:\\cc\\communiclass\\server\\communiclass\\communiclass.csproj",
+        "packagesPath": "C:\\Users\\yaelm\\.nuget\\packages\\",
+        "outputPath": "D:\\cc\\communiclass\\server\\communiclass\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Moshe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\yaelm\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,7 +40,15 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.15, )"
+            },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[3.1.15, )"
             },
@@ -71,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
