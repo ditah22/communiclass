@@ -25,6 +25,13 @@ class AuthService {
     }
   }
 
-//sign out anon
-
+  //sign out anon //TODO: use this method to logout @sagi @tomer
+  Future signOut() async {
+    try {
+      return await _auth.signOut();
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 }
