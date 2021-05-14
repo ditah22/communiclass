@@ -9,6 +9,7 @@ class _TeacherRoomState extends State<TeacherRoom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: Colors.deepPurple[900],
         title: Text('This is teacher room'),
@@ -91,18 +92,23 @@ class _presNumberState extends State<presNumber> {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
-            child: CircleAvatar(
-              backgroundColor: Colors.deepPurple[900],
-              radius: 50.0,
-              child: Text(
-                '$average',
-                style: TextStyle(
-                  color: Colors.white,
-                  letterSpacing: 2.0,
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
+            child: GestureDetector(
+              onTap: (){
+                  //TODO add call to server
+              },
+              child: CircleAvatar(
+                backgroundColor: Colors.deepPurple[900],
+                radius: 50.0,
+                child: Text(
+                  '$average',
+                  style: TextStyle(
+                    color: Colors.white,
+                    letterSpacing: 2.0,
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
             ),
           ),
