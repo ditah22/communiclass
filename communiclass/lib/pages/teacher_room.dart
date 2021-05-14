@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:communiclass/models/user.dart';
 
 class TeacherRoom extends StatefulWidget {
+  final User _user;
+  final String _roomName;
+
+  TeacherRoom(this._user, this._roomName);
+
   @override
   _TeacherRoomState createState() => _TeacherRoomState();
 }
 
 class _TeacherRoomState extends State<TeacherRoom> {
+
+  double average = 10;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.deepPurple[900],
         title: Text('This is teacher room'),
@@ -19,101 +28,98 @@ class _TeacherRoomState extends State<TeacherRoom> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-      presNumber(),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.pop(context);
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Colors.deepPurple[900],
-              ),
-              child: Text(
-                "End session",
-                style: TextStyle(
-                  fontSize: 17.0,
-                  letterSpacing: 0.8,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-        ],
-      ),
-    );
-  }
-}
-
-class presNumber extends StatefulWidget {
-  @override
-  _presNumberState createState() => _presNumberState();
-}
-
-class _presNumberState extends State<presNumber> {
-  double average = 10;
-  String roomName = "Room name\nPassword";
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
-            child: Text(
-              '$roomName',
-              style: TextStyle(
-                color: Colors.black,
-                letterSpacing: 2.0,
-                fontSize: 25.0,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
-            child: Text(
-              'Average level of understanding in the classroom:',
-              style: TextStyle(
-                color: Colors.black,
-                letterSpacing: 2.0,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
-            child: GestureDetector(
-              onTap: (){
-                  //TODO add call to server
-              },
-              child: CircleAvatar(
-                backgroundColor: Colors.deepPurple[900],
-                radius: 50.0,
-                child: Text(
-                  '$average',
-                  style: TextStyle(
-                    color: Colors.white,
-                    letterSpacing: 2.0,
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
+          Center(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+                  child: Text(
+                    widget._roomName,
+                    style: TextStyle(
+                      color: Colors.black,
+                      letterSpacing: 2.0,
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+                  child: Text(
+                    'Average level of understanding in the classroom:',
+                    style: TextStyle(
+                      color: Colors.black,
+                      letterSpacing: 2.0,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      //TODO add call to server
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: Colors.deepPurple[900],
+                      radius: 50.0,
+                      child: Text(
+                        '$average',
+                        style: TextStyle(
+                          color: Colors.white,
+                          letterSpacing: 2.0,
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.deepPurple[900],
+                  ),
+                  child: Text(
+                    "End session",
+                    style: TextStyle(
+                      fontSize: 17.0,
+                      letterSpacing: 0.8,
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
         ],
       ),
     );
   }
 }
+
+// class presNumber extends StatefulWidget {
+//   @override
+//   _presNumberState createState() => _presNumberState();
+// }
+//
+// class _presNumberState extends State<presNumber> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return null;
+//   }
+// }

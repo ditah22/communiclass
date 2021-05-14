@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:communiclass/services/auth.dart';
+import 'package:communiclass/models/user.dart';
+import 'package:communiclass/pages/room.dart';
 
 class JoinRoom extends StatefulWidget {
+
   @override
   _JoinRoomState createState() => _JoinRoomState();
 }
@@ -8,6 +12,7 @@ class JoinRoom extends StatefulWidget {
 class _JoinRoomState extends State<JoinRoom> {
   final myController = TextEditingController();
   int roomPassword = 0;
+  final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +50,13 @@ class _JoinRoomState extends State<JoinRoom> {
                 width: 250.0,
                 height: 50.0,
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    //TODO check if password is good
                     if(this.roomPassword == 1234){
-                      Navigator.pushNamed(context, '/room');
+                      User result = await signIn();
+                      Navigator.push(context, MaterialPageRoute(
+                        //TODO given password, get room name
+                          builder: (context) => Room(result)));
                     }
                     else {
                       _showMyDialog(context);
@@ -70,6 +79,16 @@ class _JoinRoomState extends State<JoinRoom> {
         ),
       ),
     );
+  }
+  Future signIn() async {
+    dynamic result = await _auth.signInAnon();
+    if (result == null) {
+      print('error sign-in');
+    } else {
+      print('signed in');
+      print(result.uid);
+      return result;
+    }
   }
 }
 
@@ -105,5 +124,6 @@ Future<void> _showMyDialog(context) async {
     },
   );
 }
+
 
 

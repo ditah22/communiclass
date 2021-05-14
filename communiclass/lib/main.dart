@@ -12,9 +12,9 @@ void main() {
     routes: {
       '/home': (context) => Home(),
       '/create_room': (context) => OpenRoom(),
-      '/room': (context) => Room(),
+      // '/room': (context) => Room(),
       '/join_room': (context) => JoinRoom(),
-      '/teacher_room': (context) => TeacherRoom(),
+      // '/teacher_room': (context) => TeacherRoom(),
     },
   ));
 }

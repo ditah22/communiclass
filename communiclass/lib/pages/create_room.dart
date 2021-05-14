@@ -1,5 +1,7 @@
+import 'package:communiclass/pages/teacher_room.dart';
 import 'package:flutter/material.dart';
-import 'package:communiclass/pages/commands.dart';
+import 'package:communiclass/services/auth.dart';
+import 'package:communiclass/models/user.dart';
 
 class OpenRoom extends StatefulWidget {
   @override
@@ -8,6 +10,7 @@ class OpenRoom extends StatefulWidget {
 
 class _OpenRoomState extends State<OpenRoom> {
 
+  final AuthService _auth = AuthService();
   final myController = TextEditingController();
   String roomName = "";
   String FUNC = "createRoom";
@@ -31,10 +34,12 @@ class _OpenRoomState extends State<OpenRoom> {
                 height: 50.0,
                 child: TextField(
                   controller: myController,
-                  onChanged: (text) {this.roomName = text;},
+                  onChanged: (text) {
+                    this.roomName = text;
+                  },
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Enter a room name',
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter a room name',
                   ),
                 ),
               ),
@@ -43,13 +48,11 @@ class _OpenRoomState extends State<OpenRoom> {
                 child: SizedBox(
                   width: 250.0,
                   height: 50.0,
-                  child: ElevatedButton(onPressed: () {
-                    // Future<String> s = Commands.createRoom(FUNC, roomName);
-                    // print(s);
-                    //TODO add http request - createRoom
-                    //TODO post user ID, room name
-                    //TODO send PIN to next screen
-                    Navigator.pushNamed(context, '/teacher_room');
+                  child: ElevatedButton(onPressed: () async {
+                    User result = await signIn();
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => TeacherRoom(result, roomName)));
+                    // Navigator.pushNamed(context, '/teacher_room');
                   },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.deepPurple[900],
@@ -70,5 +73,15 @@ class _OpenRoomState extends State<OpenRoom> {
       ),
     );
   }
+  Future signIn() async {
+    dynamic result = await _auth.signInAnon();
+    if (result == null) {
+      print('error sign-in');
+    } else {
+      print('signed in');
+      print(result.uid);
+      return result;
+    }
+  }
 }
-//post - http://localhost:5000/communiclass/createRoom?adminId="yael"&roomName="The Queen"
+

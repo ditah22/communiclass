@@ -1,5 +1,4 @@
 import 'package:communiclass/models/user.dart';
-import 'package:communiclass/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -8,8 +7,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final AuthService _auth = AuthService();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,8 +26,7 @@ class _HomeState extends State<Home> {
                 width: 250.0,
                 height: 50.0,
                 child: ElevatedButton(
-                    onPressed: () async {
-                      User result = await signIn();
+                    onPressed: () {
                       Navigator.pushNamed(context, '/create_room');
                     },
                     style: ElevatedButton.styleFrom(
@@ -50,8 +46,7 @@ class _HomeState extends State<Home> {
                   width: 250.0,
                   height: 50.0,
                   child: ElevatedButton(
-                    onPressed: () async {
-                      User result = await signIn();
+                    onPressed: () {
                       Navigator.pushNamed(context, '/join_room');
                     },
                     style: ElevatedButton.styleFrom(
@@ -72,16 +67,5 @@ class _HomeState extends State<Home> {
         ),
       )),
     );
-  }
-
-  Future signIn() async {
-    dynamic result = await _auth.signInAnon();
-    if (result == null) {
-      print('error sign-in');
-    } else {
-      print('signed in');
-      print(result.uid);
-      return result;
-    }
   }
 }
