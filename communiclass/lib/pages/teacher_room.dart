@@ -9,6 +9,7 @@ class _TeacherRoomState extends State<TeacherRoom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: Colors.deepPurple[900],
         title: Text('This is teacher room'),
@@ -64,22 +65,9 @@ class _presNumberState extends State<presNumber> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
+            padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
             child: Text(
               '$roomName',
-              style: TextStyle(
-                color: Colors.black,
-                letterSpacing: 2.0,
-                fontSize: 30.0,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 0.0),
-            child: Text(
-              'Average level of understanding in the classroom:',
               style: TextStyle(
                 color: Colors.black,
                 letterSpacing: 2.0,
@@ -90,19 +78,37 @@ class _presNumberState extends State<presNumber> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 0.0),
-            child: CircleAvatar(
-              backgroundColor: Colors.deepPurple[900],
-              radius: 70.0,
-              child: Text(
-                '$average',
-                style: TextStyle(
-                  color: Colors.white,
-                  letterSpacing: 2.0,
-                  fontSize: 50.0,
-                  fontWeight: FontWeight.bold,
+            padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+            child: Text(
+              'Average level of understanding in the classroom:',
+              style: TextStyle(
+                color: Colors.black,
+                letterSpacing: 2.0,
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+            child: GestureDetector(
+              onTap: (){
+                  //TODO add call to server
+              },
+              child: CircleAvatar(
+                backgroundColor: Colors.deepPurple[900],
+                radius: 50.0,
+                child: Text(
+                  '$average',
+                  style: TextStyle(
+                    color: Colors.white,
+                    letterSpacing: 2.0,
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
             ),
           ),

@@ -82,6 +82,8 @@ class SliderWidget extends StatefulWidget {
 
 class _SliderWidgetState extends State<SliderWidget> {
   double _value = 1;
+  int max = 10;
+  int min = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -89,87 +91,110 @@ class _SliderWidgetState extends State<SliderWidget> {
 
     if (this.widget.fullWidth) paddingFactor = .3;
 
-    return Container(
-      width: this.widget.fullWidth
-          ? double.infinity
-          : (this.widget.sliderHeight) * 5.5,
-      height: (this.widget.sliderHeight),
-      decoration: new BoxDecoration(
-        borderRadius: new BorderRadius.all(
-          Radius.circular((this.widget.sliderHeight * .3)),
-        ),
-        gradient: new LinearGradient(
-            colors: [
-              Colors.deepPurple[100],
-              Colors.deepPurple[900],
-            ],
-            begin: const FractionalOffset(0.0, 0.0),
-            end: const FractionalOffset(1.0, 1.00),
-            stops: [0.0, 1.0],
-            tileMode: TileMode.clamp),
-      ),
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(this.widget.sliderHeight * paddingFactor,
-            2, this.widget.sliderHeight * paddingFactor, 2),
-        child: Row(
-          children: <Widget>[
-            Text(
-              '${this.widget.min}',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: this.widget.sliderHeight * .3,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
+    return Column(
+      children: [
+        Container(
+          width: this.widget.fullWidth
+              ? double.infinity
+              : (this.widget.sliderHeight) * 5.5,
+          height: (this.widget.sliderHeight),
+          decoration: new BoxDecoration(
+            borderRadius: new BorderRadius.all(
+              Radius.circular((this.widget.sliderHeight * .3)),
             ),
-            SizedBox(
-              width: this.widget.sliderHeight * .1,
-            ),
-            Expanded(
-              child: Center(
-                child: SliderTheme(
-                  data: SliderTheme.of(context).copyWith(
-                    activeTrackColor: Colors.white.withOpacity(1),
-                    inactiveTrackColor: Colors.white.withOpacity(.5),
-
-                    trackHeight: 4.0,
-                    thumbShape: CustomSliderThumbCircle(
-                      thumbRadius: this.widget.sliderHeight * .4,
-                      min: this.widget.min,
-                      max: this.widget.max,
-                    ),
-                    overlayColor: Colors.white.withOpacity(.4),
-                    //valueIndicatorColor: Colors.white,
-                    activeTickMarkColor: Colors.red,
-                    inactiveTickMarkColor: Colors.red.withOpacity(.7),
+            gradient: new LinearGradient(
+                colors: [
+                  Colors.deepPurple[100],
+                  Colors.deepPurple[900],
+                ],
+                begin: const FractionalOffset(0.0, 0.0),
+                end: const FractionalOffset(1.0, 1.00),
+                stops: [0.0, 1.0],
+                tileMode: TileMode.clamp),
+          ),
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(this.widget.sliderHeight * paddingFactor,
+                2, this.widget.sliderHeight * paddingFactor, 2),
+            child: Row(
+              children: <Widget>[
+                Text(
+                  '${this.widget.min}',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: this.widget.sliderHeight * .3,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
                   ),
-                  child: Slider(
-                      value: _value,
-                      activeColor: Colors.grey[900],
-                      inactiveColor: Colors.deepPurple[100],
-                      onChanged: (value) {
-                        setState(() {
-                          _value = value;
-                        });
-                      }),
                 ),
-              ),
+                SizedBox(
+                  width: this.widget.sliderHeight * .1,
+                ),
+                Expanded(
+                  child: Center(
+                    child: SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                        activeTrackColor: Colors.white.withOpacity(1),
+                        inactiveTrackColor: Colors.white.withOpacity(.5),
+
+                        trackHeight: 4.0,
+                        thumbShape: CustomSliderThumbCircle(
+                          thumbRadius: this.widget.sliderHeight * .4,
+                          min: this.widget.min,
+                          max: this.widget.max,
+                        ),
+                        overlayColor: Colors.white.withOpacity(.4),
+                        //valueIndicatorColor: Colors.white,
+                        activeTickMarkColor: Colors.red,
+                        inactiveTickMarkColor: Colors.red.withOpacity(.7),
+                      ),
+                      child: Slider(
+                          value: _value,
+                          activeColor: Colors.grey[900],
+                          inactiveColor: Colors.deepPurple[100],
+                          onChanged: (value) {
+                            setState(() {
+                              //TODO update server
+                              _value = value;
+                            });
+                          }),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: this.widget.sliderHeight * .1,
+                ),
+                Text(
+                  '${this.widget.max}',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: this.widget.sliderHeight * .3,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(
-              width: this.widget.sliderHeight * .1,
-            ),
-            Text(
-              '${this.widget.max}',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: this.widget.sliderHeight * .3,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0.0, 25.0, 0.0, 0.0),
+          child: ElevatedButton(onPressed: () {
+            int value  = (min + (max - min) * _value).round();
+            print('$value');
+          },
+            style: ElevatedButton.styleFrom(
+              primary: Colors.deepPurple[900],
+            ),
+            child: Text(
+              "Submit",
+              style: TextStyle(
+                fontSize: 17.0,
+                letterSpacing: 0.8,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
