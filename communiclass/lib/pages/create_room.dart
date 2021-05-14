@@ -1,8 +1,8 @@
 import 'package:communiclass/pages/teacher_room.dart';
+import 'package:communiclass/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:communiclass/services/auth.dart';
 import 'package:communiclass/models/user.dart';
-
 
 class OpenRoom extends StatefulWidget {
   @override
@@ -10,7 +10,6 @@ class OpenRoom extends StatefulWidget {
 }
 
 class _OpenRoomState extends State<OpenRoom> {
-
   final AuthService _auth = AuthService();
   final myController = TextEditingController();
   String roomName = "";
@@ -35,10 +34,12 @@ class _OpenRoomState extends State<OpenRoom> {
                 height: 50.0,
                 child: TextField(
                   controller: myController,
-                  onChanged: (text) {this.roomName = text;},
+                  onChanged: (text) {
+                    this.roomName = text;
+                  },
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Enter a room name',
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter a room name',
                   ),
                 ),
               ),
@@ -47,12 +48,17 @@ class _OpenRoomState extends State<OpenRoom> {
                 child: SizedBox(
                   width: 250.0,
                   height: 50.0,
-                  child: ElevatedButton(onPressed: () async {
-                    User result = await signIn();
-                    Navigator.push(context, MaterialPageRoute(
-                      //TODO given password, get room name
-                        builder: (context) => TeacherRoom(result, this.roomName)));
-                  },
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      User result = await signIn();
+                      dynamic a = await DatabaseService(uid: result.uid).updateRoomManager(this.roomName);
+                      print(a);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              //TODO given password, get room name
+                              builder: (context) => TeacherRoom(result, this.roomName)));
+                    },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.deepPurple[900],
                     ),
@@ -72,6 +78,7 @@ class _OpenRoomState extends State<OpenRoom> {
       ),
     );
   }
+
   Future signIn() async {
     dynamic result = await _auth.signInAnon();
     if (result == null) {
@@ -83,4 +90,3 @@ class _OpenRoomState extends State<OpenRoom> {
     }
   }
 }
-

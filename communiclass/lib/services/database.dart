@@ -8,18 +8,23 @@ class DatabaseService {
   DatabaseService({this.uid});
 
   // collection reference
-  final CollectionReference roomManagerCollection = Firestore.instance.collection('room_manager');
+  final CollectionReference roomManagerCollection = Firestore.instance.collection('room_manager2');
   final CollectionReference roomsCollection = Firestore.instance.collection('rooms');
 
   //TODO: implement stats
   // final CollectionReference statsCollection = Firestore.instance.collection('stats');
 
   Future updateRoomManager(String roomName) async {
-    int min = 10000000;
-    int max = 99999999;
-    int pin = min + _random.nextInt(max - min); //TODO handle if exist
-    return await roomManagerCollection.document(pin.toString()).setData({
-      'uid': uid,
+    int min = 100000;
+    int max = 999999;
+    int pin;
+    bool flag = true;
+    // while (flag) {
+    pin = min + _random.nextInt(max - min);
+      // roomManagerCollection.document(pin.toString()).get().then((doc) => {flag = (doc.exists)});
+    // }
+    return await roomManagerCollection.document(uid).setData({
+      'pin': pin,
       'roomName': roomName,
     });
   }
@@ -30,8 +35,8 @@ class DatabaseService {
     roomManagerCollection.document(pin.toString()).get().then((doc) => {flag = (doc.exists)});
     if (flag) {
       //return doc values
-      return await roomsCollection.document(pin.toString()).setData({
-        'uid': uid,
+      return await roomsCollection.document(uid).setData({
+        'pin': pin,
         'grade': grade,
       });
     }
