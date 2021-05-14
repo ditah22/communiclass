@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:communiclass/pages/commands.dart';
 
 class OpenRoom extends StatefulWidget {
   @override
@@ -44,8 +43,6 @@ class _OpenRoomState extends State<OpenRoom> {
                   width: 250.0,
                   height: 50.0,
                   child: ElevatedButton(onPressed: () {
-                    // Future<String> s = Commands.createRoom(FUNC, roomName);
-                    // print(s);
                     //TODO add http request - createRoom
                     //TODO post user ID, room name
                     //TODO send PIN to next screen
