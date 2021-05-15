@@ -61,8 +61,12 @@ class _TeacherRoomState extends State<TeacherRoom> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
                   child: GestureDetector(
-                    onTap: () async {
-                      average = await DatabaseService(uid: widget.user.uid).getRoomAvg(widget.pin);
+                    onTap: () async{
+                      double current=await DatabaseService(uid: widget.user.uid).getRoomAvg(widget.pin);
+                      // print(current);
+                      setState(() {
+                        average = current;
+                      });
                     },
                     child: CircleAvatar(
                       backgroundColor: Colors.deepPurple[900],

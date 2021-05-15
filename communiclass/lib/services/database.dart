@@ -21,10 +21,9 @@ class DatabaseService {
     bool flag = true;
     while (flag) {
       pin = min + _random.nextInt(max - min);
-      await roomManagerCollection.document(pin.toString()).get().then((doc) =>
-      {
-        flag = (doc.exists),
-      });
+      await roomManagerCollection.document(pin.toString()).get().then((doc) => {
+            flag = (doc.exists),
+          });
     }
     await roomManagerCollection.document(pin.toString()).setData({
       'uid': uid,
@@ -56,15 +55,17 @@ class DatabaseService {
   Future getRoomAvg(int pin) async {
     double sum = 0;
     int total = 0;
-    roomsCollection
-        .where("pin", isEqualTo: pin.toString())
+    await roomsCollection
+        .where("pin", isEqualTo: pin)
         .getDocuments()
-        .then((queryDocs) =>
-        queryDocs.documents.forEach((doc) {
-          sum += doc.data["grade"];
-          total += 1;
-        }));
-    return sum/total;
+        .then((queryDocs) async => queryDocs.documents.forEach((doc) {
+              sum += doc.data["grade"];
+              total += 1;
+            }));
+    if (total == 0) {
+      return 10;
+    }
+    return sum / total;
   }
 // Future updateStats() async {}
 }
