@@ -3,9 +3,11 @@ import 'custom_slider_thumb_circle.dart';
 import 'package:communiclass/models/user.dart';
 
 class Room extends StatefulWidget {
-  final User _user;
+  final User user;
+  final String roomName;
+  final int pin;
 
-  Room(this._user);
+  Room(this.user, this.roomName, this.pin);
 
   @override
   _RoomState createState() => _RoomState();
@@ -28,6 +30,16 @@ class _RoomState extends State<Room> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
+              "Room Name: " + widget.roomName + "\nRoom Pin: " + widget.pin.toString(),
+              style: TextStyle(
+                color: Colors.black,
+                letterSpacing: 1.3,
+                fontSize: 22.0,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            Text(
               'Use this slider to rate your current level of understanding',
               style: TextStyle(
                 color: Colors.black,
@@ -40,7 +52,7 @@ class _RoomState extends State<Room> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 0.0),
               child: Center(
-                child: SliderWidget(widget._user),
+                child: SliderWidget(widget.user, widget.pin),
               ),
             ),
           ],

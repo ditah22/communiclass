@@ -1,3 +1,4 @@
+import 'package:communiclass/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:communiclass/models/user.dart';
 
@@ -70,8 +71,9 @@ class SliderWidget extends StatefulWidget {
   final int max =10;
   final fullWidth = false;
   final User _user;
+  final int pin;
 
-  SliderWidget(this._user);
+  SliderWidget(this._user, this.pin);
 
   @override
   _SliderWidgetState createState() => _SliderWidgetState();
@@ -174,8 +176,9 @@ class _SliderWidgetState extends State<SliderWidget> {
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
-          child: ElevatedButton(onPressed: () {
+          child: ElevatedButton(onPressed: () async{
             int value  = (widget.min + (widget.max - widget.min) * _value).round();
+            await DatabaseService(uid: widget._user.uid).updateRooms(widget.pin, value);
             print(widget._user.uid);
           },
             style: ElevatedButton.styleFrom(

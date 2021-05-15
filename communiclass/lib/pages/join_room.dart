@@ -5,14 +5,13 @@ import 'package:communiclass/models/user.dart';
 import 'package:communiclass/pages/room.dart';
 
 class JoinRoom extends StatefulWidget {
-
   @override
   _JoinRoomState createState() => _JoinRoomState();
 }
 
 class _JoinRoomState extends State<JoinRoom> {
   final myController = TextEditingController();
-  int roomPassword = 0;
+  int pin = 0;
   final AuthService _auth = AuthService();
 
   @override
@@ -35,7 +34,7 @@ class _JoinRoomState extends State<JoinRoom> {
                 child: TextField(
                   controller: myController,
                   onChanged: (text) {
-                    this.roomPassword = int.parse(text);
+                    this.pin = int.parse(text);
                   },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
@@ -52,12 +51,18 @@ class _JoinRoomState extends State<JoinRoom> {
                 height: 50.0,
                 child: ElevatedButton(
                   onPressed: () async {
-                    User result = await signIn();
-                    await DatabaseService(uid: result.uid).updateRooms(this.roomPassword, 10);
-                    Navigator.push(context, MaterialPageRoute(
-                      //TODO given password, get room name
-                        builder: (context) => Room(result)));
-                    // _showMyDialog(context);
+                    User user = await signIn();
+                    bool joined = await DatabaseService(uid: user.uid).updateRooms(this.pin, 10);
+                    if (joined) {
+                      String roomName = await DatabaseService(uid: user.uid).getRoomName(this.pin);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              //TODO given password, get room name
+                              builder: (context) => Room(user, roomName, this.pin)));
+                    } else {
+                      _showMyDialog(context);
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.deepPurple[900],
@@ -77,6 +82,7 @@ class _JoinRoomState extends State<JoinRoom> {
       ),
     );
   }
+
   Future signIn() async {
     dynamic result = await _auth.signInAnon();
     if (result == null) {
@@ -102,8 +108,11 @@ Future<void> _showMyDialog(context) async {
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text('Wrong password', textAlign: TextAlign.center,
-                  textScaleFactor: 1.4,),
+                  Text(
+                    'Wrong Pin',
+                    textAlign: TextAlign.center,
+                    textScaleFactor: 1.4,
+                  ),
                 ],
               ),
             ),
@@ -121,6 +130,3 @@ Future<void> _showMyDialog(context) async {
     },
   );
 }
-
-
-

@@ -1,3 +1,4 @@
+import 'package:communiclass/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:communiclass/models/user.dart';
 
@@ -34,7 +35,7 @@ class _TeacherRoomState extends State<TeacherRoom> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
                   child: Text(
-                    "Room Name: " + widget.roomName + "\nPin: " + widget.pin.toString(),
+                    "Room Name: " + widget.roomName + "\nRoom Pin: " + widget.pin.toString(),
                     style: TextStyle(
                       color: Colors.black,
                       letterSpacing: 2.0,
@@ -60,8 +61,8 @@ class _TeacherRoomState extends State<TeacherRoom> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
                   child: GestureDetector(
-                    onTap: () {
-                      //TODO add call to server
+                    onTap: () async {
+                      average = await DatabaseService(uid: widget.user.uid).getRoomAvg(widget.pin);
                     },
                     child: CircleAvatar(
                       backgroundColor: Colors.deepPurple[900],

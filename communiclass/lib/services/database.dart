@@ -21,9 +21,10 @@ class DatabaseService {
     bool flag = true;
     while (flag) {
       pin = min + _random.nextInt(max - min);
-        await roomManagerCollection.document(pin.toString()).get().then((doc) => {
-            flag = (doc.exists),
-          });
+      await roomManagerCollection.document(pin.toString()).get().then((doc) =>
+      {
+        flag = (doc.exists),
+      });
     }
     await roomManagerCollection.document(pin.toString()).setData({
       'uid': uid,
@@ -35,10 +36,7 @@ class DatabaseService {
   Future updateRooms(int pin, int grade) async {
     bool flag;
     // flag = true if document with pin exists else false
-    await roomManagerCollection
-        .document(pin.toString())
-        .get()
-        .then((doc) => {flag = (doc.exists)});
+    await roomManagerCollection.document(pin.toString()).get().then((doc) => {flag = (doc.exists)});
     if (flag) {
       //return doc values
       await roomsCollection.document(uid).setData({
@@ -51,5 +49,22 @@ class DatabaseService {
     return false;
   }
 
+  Future getRoomName(int pin) async {
+    return await roomManagerCollection.document(pin.toString()).get().then((doc) => doc.data["roomName"]);
+  }
+
+  Future getRoomAvg(int pin) async {
+    double sum = 0;
+    int total = 0;
+    roomsCollection
+        .where("pin", isEqualTo: pin.toString())
+        .getDocuments()
+        .then((queryDocs) =>
+        queryDocs.documents.forEach((doc) {
+          sum += doc.data["grade"];
+          total += 1;
+        }));
+    return sum/total;
+  }
 // Future updateStats() async {}
 }
