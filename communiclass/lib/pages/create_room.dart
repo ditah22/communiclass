@@ -50,13 +50,14 @@ class _OpenRoomState extends State<OpenRoom> {
                   height: 50.0,
                   child: ElevatedButton(
                     onPressed: () async {
-                      User result = await signIn();
-                      await DatabaseService(uid: result.uid).updateRoomManager(this.roomName);
+                      User user = await signIn();
+                      int pin = await DatabaseService(uid: user.uid).updateRoomManager(this.roomName);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               //TODO given password, get room name
-                              builder: (context) => TeacherRoom(result, this.roomName)));
+                              builder: (context) =>
+                                  TeacherRoom(user,this.roomName, pin)));
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.deepPurple[900],

@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:communiclass/models/user.dart';
 
 class TeacherRoom extends StatefulWidget {
-  final User _user;
-  final String _roomName;
+  final User user;
+  final String roomName;
+  final int pin;
 
-  TeacherRoom(this._user, this._roomName);
+  TeacherRoom(this.user, this.roomName, this.pin);
 
   @override
   _TeacherRoomState createState() => _TeacherRoomState();
 }
 
 class _TeacherRoomState extends State<TeacherRoom> {
-
   double average = 10;
 
   @override
@@ -34,7 +34,7 @@ class _TeacherRoomState extends State<TeacherRoom> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
                   child: Text(
-                    widget._roomName,
+                    "Room Name: " + widget.roomName + "\nPin: " + widget.pin.toString(),
                     style: TextStyle(
                       color: Colors.black,
                       letterSpacing: 2.0,
