@@ -1,3 +1,4 @@
+import 'package:communiclass/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:communiclass/services/auth.dart';
 import 'package:communiclass/models/user.dart';
@@ -51,16 +52,12 @@ class _JoinRoomState extends State<JoinRoom> {
                 height: 50.0,
                 child: ElevatedButton(
                   onPressed: () async {
-                    //TODO check if password is good
-                    if(this.roomPassword == 1234){
-                      User result = await signIn();
-                      Navigator.push(context, MaterialPageRoute(
-                        //TODO given password, get room name
-                          builder: (context) => Room(result)));
-                    }
-                    else {
-                      _showMyDialog(context);
-                    }
+                    User result = await signIn();
+                    await DatabaseService(uid: result.uid).updateRooms(this.roomPassword, 10);
+                    Navigator.push(context, MaterialPageRoute(
+                      //TODO given password, get room name
+                        builder: (context) => Room(result)));
+                    // _showMyDialog(context);
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.deepPurple[900],

@@ -23,10 +23,11 @@ class DatabaseService {
     pin = min + _random.nextInt(max - min);
       roomManagerCollection.document(pin.toString()).get().then((doc) => {flag = (doc.exists)});
     }
-    return await roomManagerCollection.document(pin.toString()).setData({
+    await roomManagerCollection.document(pin.toString()).setData({
       'uid': uid,
       'roomName': roomName,
     });
+    return pin;
   }
 
   Future updateRooms(int pin, int grade) async {
@@ -35,13 +36,13 @@ class DatabaseService {
     roomManagerCollection.document(pin.toString()).get().then((doc) => {flag = (doc.exists)});
     if (flag) {
       //return doc values
-      return await roomsCollection.document(uid).setData({
+      await roomsCollection.document(uid).setData({
         'pin': pin,
         'grade': grade,
       });
     }
     //else doc not exists!
-    return null;
+    return;
   }
 
 // Future updateStats() async {}

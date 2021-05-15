@@ -51,8 +51,7 @@ class _OpenRoomState extends State<OpenRoom> {
                   child: ElevatedButton(
                     onPressed: () async {
                       User result = await signIn();
-                      dynamic a = await DatabaseService(uid: result.uid).updateRoomManager(this.roomName);
-                      print(a);
+                      await DatabaseService(uid: result.uid).updateRoomManager(this.roomName);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
