@@ -54,7 +54,7 @@ class DatabaseService {
 
   Future getRoomAvg(int pin) async {
     double sum = 0;
-    int total = 0;
+    double total = 0;
     await roomsCollection
         .where("pin", isEqualTo: pin)
         .getDocuments()
@@ -63,9 +63,13 @@ class DatabaseService {
               total += 1;
             }));
     if (total == 0) {
-      return 10;
+      return 10.0;
     }
     return sum / total;
+  }
+
+  Future closeRoom(int pin) async {
+    await roomManagerCollection.document(pin.toString()).delete();
   }
 // Future updateStats() async {}
 }
