@@ -23,8 +23,8 @@ class DatabaseService {
     pin = min + _random.nextInt(max - min);
       // roomManagerCollection.document(pin.toString()).get().then((doc) => {flag = (doc.exists)});
     // }
-    return await roomManagerCollection.document(uid).setData({
-      'pin': pin,
+    return await roomManagerCollection.document(pin.toString()).setData({
+      'uid': uid,
       'roomName': roomName,
     });
   }
