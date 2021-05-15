@@ -8,7 +8,7 @@ class DatabaseService {
   DatabaseService({this.uid});
 
   // collection reference
-  final CollectionReference roomManagerCollection = Firestore.instance.collection('room_manager2');
+  final CollectionReference roomManagerCollection = Firestore.instance.collection('room_manager');
   final CollectionReference roomsCollection = Firestore.instance.collection('rooms');
 
   //TODO: implement stats
@@ -19,10 +19,10 @@ class DatabaseService {
     int max = 999999;
     int pin;
     bool flag = true;
-    // while (flag) {
+    while (flag) {
     pin = min + _random.nextInt(max - min);
-      // roomManagerCollection.document(pin.toString()).get().then((doc) => {flag = (doc.exists)});
-    // }
+      roomManagerCollection.document(pin.toString()).get().then((doc) => {flag = (doc.exists)});
+    }
     return await roomManagerCollection.document(pin.toString()).setData({
       'uid': uid,
       'roomName': roomName,
