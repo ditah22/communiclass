@@ -16,23 +16,27 @@ class TeacherRoom extends StatefulWidget {
 class _TeacherRoomState extends State<TeacherRoom> {
   double average = 10;
 
+  final String CLOSE_THE_ROOM = 'Do you want to close the room';
+  final String END_SESSION = 'Do you want to end the session';
+
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        await DatabaseService(uid: widget.user.uid).closeRoom(widget.pin);
-        Navigator.pop(context, true);
-        return;
-      },
+    return new WillPopScope(
+      onWillPop: ()=>_onBackPressed(CLOSE_THE_ROOM),
+        //   () async {
+        // await DatabaseService(uid: widget.user.uid).closeRoom(widget.pin);
+        // Navigator.pop(context, true);
+        // return;},
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           leading: new IconButton(
               icon: new Icon(Icons.arrow_back),
-              onPressed: () async{
-                await DatabaseService(uid: widget.user.uid).closeRoom(widget.pin);
-                Navigator.pop(context, true);
-              }),
+              onPressed: ()=>_onBackPressed(CLOSE_THE_ROOM)
+                //   () async{
+                // await DatabaseService(uid: widget.user.uid).closeRoom(widget.pin);
+                // Navigator.pop(context, true);}
+                ),
           backgroundColor: Colors.deepPurple[900],
           title: Text('This is teacher room'),
           centerTitle: true,
@@ -105,10 +109,11 @@ class _TeacherRoomState extends State<TeacherRoom> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      Navigator.pop(context);
-                    },
+                    onPressed: ()=>_onBackPressed(END_SESSION),
+                    //     () {
+                    //   Navigator.pop(context);
+                    //   Navigator.pop(context);
+                    // },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.deepPurple[900],
                     ),
@@ -128,16 +133,57 @@ class _TeacherRoomState extends State<TeacherRoom> {
       ),
     );
   }
+
+  Future<bool> _onBackPressed(String text) async {
+    return showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+        title: new Text('Are you sure?'),
+        content: new Text(text),
+        actions: <Widget>[
+          new GestureDetector(
+            onTap: ()  async{
+              await DatabaseService(uid: widget.user.uid).closeRoom(widget.pin);
+              Navigator.of(context).pop(true);
+              Navigator.of(context).pop(true);
+              Navigator.of(context).pop(true);
+            },
+            child: roundedButton(" Yes ", Colors.deepPurple[900],
+                const Color(0xFFFFFFFF)),
+          ),
+          new GestureDetector(
+            onTap: ()  {
+              Navigator.of(context).pop(false);},
+            child: roundedButton("No", Colors.deepPurple[900],
+                const Color(0xFFFFFFFF)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget roundedButton(String buttonLabel, Color bgColor, Color textColor) {
+    var loginBtn = new Container(
+      padding: EdgeInsets.all(5.0),
+      alignment: FractionalOffset.center,
+      width: 55.0,
+      decoration: new BoxDecoration(
+        color: bgColor,
+        borderRadius: new BorderRadius.all(const Radius.circular(10.0)),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: const Color(0xFF696969),
+            offset: Offset(1.0, 6.0),
+          ),
+        ],
+      ),
+      child: Text(
+        buttonLabel,
+        style: new TextStyle(
+            color: textColor, fontSize: 20.0, fontWeight: FontWeight.bold),
+      ),
+    );
+    return loginBtn;
+  }
 }
 
-// class presNumber extends StatefulWidget {
-//   @override
-//   _presNumberState createState() => _presNumberState();
-// }
-//
-// class _presNumberState extends State<presNumber> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return null;
-//   }
-// }
