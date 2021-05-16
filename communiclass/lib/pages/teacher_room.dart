@@ -1,6 +1,7 @@
 import 'package:communiclass/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:communiclass/models/user.dart';
+import 'package:wakelock/wakelock.dart';
 
 class TeacherRoom extends StatefulWidget {
   final User user;
@@ -144,6 +145,7 @@ class _TeacherRoomState extends State<TeacherRoom> {
           new GestureDetector(
             onTap: ()  async{
               await DatabaseService(uid: widget.user.uid).closeRoom(widget.pin);
+              Wakelock.disable();
               Navigator.of(context).pop(true);
               Navigator.of(context).pop(true);
               Navigator.of(context).pop(true);

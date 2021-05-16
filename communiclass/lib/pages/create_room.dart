@@ -3,6 +3,7 @@ import 'package:communiclass/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:communiclass/services/auth.dart';
 import 'package:communiclass/models/user.dart';
+import 'package:wakelock/wakelock.dart';
 
 class OpenRoom extends StatefulWidget {
   @override
@@ -52,6 +53,7 @@ class _OpenRoomState extends State<OpenRoom> {
                     onPressed: () async {
                       User user = await signIn();
                       int pin = await DatabaseService(uid: user.uid).updateRoomManager(this.roomName);
+                      Wakelock.enable();
                       Navigator.push(
                           context,
                           MaterialPageRoute(
