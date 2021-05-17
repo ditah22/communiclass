@@ -76,28 +76,45 @@ class _TeacherRoomState extends State<TeacherRoom> {
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
-                    child: GestureDetector(
-                      onTap: () async {
-                        double current = await DatabaseService(uid: widget.user.uid).getRoomAvg(widget.pin);
-                        // print(current);
-                        setState(() {
-                          average = current;
-                        });
-                      },
-                      child: CircleAvatar(
-                        backgroundColor: paintCircleAvatar(average),
-                        radius: 50.0,
-                        child: Text(
-                          '$average',
+                    child: Column(
+                      children: [
+                        Text(
+                          'Tap to refresh',
                           style: TextStyle(
                             color: Colors.black,
                             letterSpacing: 2.0,
-                            fontSize: 35.0,
+                            fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                           ),
                           textAlign: TextAlign.center,
                         ),
-                      ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0.0, 7.0, 0.0, 0.0),
+                          child: GestureDetector(
+                            onTap: () async {
+                              double current = await DatabaseService(uid: widget.user.uid).getRoomAvg(widget.pin);
+                              // print(current);
+                              setState(() {
+                                average = current;
+                              });
+                            },
+                            child: CircleAvatar(
+                              backgroundColor: paintCircleAvatar(average),
+                              radius: 50.0,
+                              child: Text(
+                                average.toStringAsFixed(1),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  letterSpacing: 2.0,
+                                  fontSize: 35.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
