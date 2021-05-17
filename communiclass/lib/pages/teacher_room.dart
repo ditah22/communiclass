@@ -23,21 +23,20 @@ class _TeacherRoomState extends State<TeacherRoom> {
   @override
   Widget build(BuildContext context) {
     return new WillPopScope(
-      onWillPop: ()=>_onBackPressed(CLOSE_THE_ROOM),
-        //   () async {
-        // await DatabaseService(uid: widget.user.uid).closeRoom(widget.pin);
-        // Navigator.pop(context, true);
-        // return;},
+      onWillPop: () => _onBackPressed(CLOSE_THE_ROOM),
+      //   () async {
+      // await DatabaseService(uid: widget.user.uid).closeRoom(widget.pin);
+      // Navigator.pop(context, true);
+      // return;},
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          leading: new IconButton(
-              icon: new Icon(Icons.arrow_back),
-              onPressed: ()=>_onBackPressed(CLOSE_THE_ROOM)
-                //   () async{
-                // await DatabaseService(uid: widget.user.uid).closeRoom(widget.pin);
-                // Navigator.pop(context, true);}
-                ),
+          leading:
+              new IconButton(icon: new Icon(Icons.arrow_back), onPressed: () => _onBackPressed(CLOSE_THE_ROOM)
+                  //   () async{
+                  // await DatabaseService(uid: widget.user.uid).closeRoom(widget.pin);
+                  // Navigator.pop(context, true);}
+                  ),
           backgroundColor: Colors.deepPurple[900],
           title: Text('This is teacher room'),
           centerTitle: true,
@@ -86,14 +85,14 @@ class _TeacherRoomState extends State<TeacherRoom> {
                         });
                       },
                       child: CircleAvatar(
-                        backgroundColor: Colors.deepPurple[900],
+                        backgroundColor: paintCircleAvatar(average),
                         radius: 50.0,
                         child: Text(
                           '$average',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             letterSpacing: 2.0,
-                            fontSize: 30.0,
+                            fontSize: 35.0,
                             fontWeight: FontWeight.bold,
                           ),
                           textAlign: TextAlign.center,
@@ -110,7 +109,7 @@ class _TeacherRoomState extends State<TeacherRoom> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: ElevatedButton(
-                    onPressed: ()=>_onBackPressed(END_SESSION),
+                    onPressed: () => _onBackPressed(END_SESSION),
                     //     () {
                     //   Navigator.pop(context);
                     //   Navigator.pop(context);
@@ -143,21 +142,20 @@ class _TeacherRoomState extends State<TeacherRoom> {
         content: new Text(text),
         actions: <Widget>[
           new GestureDetector(
-            onTap: ()  async{
+            onTap: () async {
               await DatabaseService(uid: widget.user.uid).closeRoom(widget.pin);
               Wakelock.disable();
               Navigator.of(context).pop(true);
               Navigator.of(context).pop(true);
               Navigator.of(context).pop(true);
             },
-            child: roundedButton(" Yes ", Colors.deepPurple[900],
-                const Color(0xFFFFFFFF)),
+            child: roundedButton(" Yes ", Colors.deepPurple[900], const Color(0xFFFFFFFF)),
           ),
           new GestureDetector(
-            onTap: ()  {
-              Navigator.of(context).pop(false);},
-            child: roundedButton("No", Colors.deepPurple[900],
-                const Color(0xFFFFFFFF)),
+            onTap: () {
+              Navigator.of(context).pop(false);
+            },
+            child: roundedButton("No", Colors.deepPurple[900], const Color(0xFFFFFFFF)),
           ),
         ],
       ),
@@ -181,11 +179,25 @@ class _TeacherRoomState extends State<TeacherRoom> {
       ),
       child: Text(
         buttonLabel,
-        style: new TextStyle(
-            color: textColor, fontSize: 20.0, fontWeight: FontWeight.bold),
+        style: new TextStyle(color: textColor, fontSize: 20.0, fontWeight: FontWeight.bold),
       ),
     );
     return loginBtn;
   }
-}
 
+  Color paintCircleAvatar(double value) {
+    if (value<3){
+      return Colors.red[900];
+    }
+    else if (value <4.5){
+      return Colors.red[400];
+    }
+    else if (value <6){
+      return Colors.orangeAccent;
+    }
+    else if (value <8){
+      return Colors.green[400];
+    }
+    return Colors.green[900];
+  }
+}
