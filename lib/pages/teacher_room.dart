@@ -24,21 +24,15 @@ class _TeacherRoomState extends State<TeacherRoom> {
   Widget build(BuildContext context) {
     return new WillPopScope(
       onWillPop: () => _onBackPressed(CLOSE_THE_ROOM),
-      //   () async {
-      // await DatabaseService(uid: widget.user.uid).closeRoom(widget.pin);
-      // Navigator.pop(context, true);
-      // return;},
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           leading:
-              new IconButton(icon: new Icon(Icons.arrow_back), onPressed: () => _onBackPressed(CLOSE_THE_ROOM)
-                  //   () async{
-                  // await DatabaseService(uid: widget.user.uid).closeRoom(widget.pin);
-                  // Navigator.pop(context, true);}
+              new IconButton(icon: new Icon(Icons.arrow_back), onPressed:
+                  () => _onBackPressed(CLOSE_THE_ROOM)
                   ),
           backgroundColor: Colors.deepPurple[900],
-          title: Text('This is teacher room'),
+          title: Text('Communiclass'),
           centerTitle: true,
           elevation: 0,
         ),
@@ -51,11 +45,11 @@ class _TeacherRoomState extends State<TeacherRoom> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
                     child: Text(
-                      "Room Name: " + widget.roomName + "\nRoom Pin: " + widget.pin.toString(),
+                      widget.roomName + "\nRoom Pin: " + widget.pin.toString(),
                       style: TextStyle(
                         color: Colors.black,
                         letterSpacing: 2.0,
-                        fontSize: 25.0,
+                        fontSize: 32.0,
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
@@ -64,11 +58,11 @@ class _TeacherRoomState extends State<TeacherRoom> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
                     child: Text(
-                      'Average level of understanding in the classroom:',
+                      'Average level of understanding in the class:',
                       style: TextStyle(
                         color: Colors.black,
                         letterSpacing: 2.0,
-                        fontSize: 20.0,
+                        fontSize: 22.0,
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,

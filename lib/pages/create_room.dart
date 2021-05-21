@@ -21,7 +21,7 @@ class _OpenRoomState extends State<OpenRoom> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple[900],
-        title: Text('This is create room screen'),
+        title: Text('Communiclass'),
         centerTitle: true,
         elevation: 0,
       ),

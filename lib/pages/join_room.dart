@@ -18,8 +18,8 @@ class _JoinRoomState extends State<JoinRoom> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue[900],
-        title: Text('This is join room screen'),
+        backgroundColor: Colors.deepPurple[900],
+        title: Text('Communiclass'),
         centerTitle: true,
         elevation: 0,
       ),
@@ -39,7 +39,7 @@ class _JoinRoomState extends State<JoinRoom> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: 'Enter room password',
+                    hintText: 'Enter room pin',
                   ),
                 ),
               ),
