@@ -1,16 +1,13 @@
 # communiclass
 
-A new Flutter application.
+App that provides an alternate communication channel between teacher and students during lectures.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Install Android studio and Flutter framework, for more information please see this [link](https://www.youtube.com/watch?v=fDnqXmLSqtg).
+- [Firebase](https://firebase.google.com/)
+  - Sign up to Firebase
+  - Create new project 
+    - save the `google-services.json` file under `android/app` directory
+  - Go to authentication tab on the left and enable anonymous authentication for your project
+  - Go to Firestore Database tab on the left and create new Cloud Firestore database
