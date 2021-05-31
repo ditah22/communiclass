@@ -15,6 +15,7 @@ class _OpenRoomState extends State<OpenRoom> {
   final myController = TextEditingController();
   String roomName = "";
   String FUNC = "createRoom";
+  String errorText = "";
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +40,8 @@ class _OpenRoomState extends State<OpenRoom> {
                     this.roomName = text;
                   },
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
                     hintText: 'Enter a room name',
+                    errorText: this.errorText,
                   ),
                 ),
               ),
@@ -51,15 +52,18 @@ class _OpenRoomState extends State<OpenRoom> {
                   height: 50.0,
                   child: ElevatedButton(
                     onPressed: () async {
-                      User user = await signIn();
-                      int pin = await DatabaseService(uid: user.uid).updateRoomManager(this.roomName);
-                      Wakelock.enable();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              //TODO given password, get room name
-                              builder: (context) =>
-                                  TeacherRoom(user,this.roomName, pin)));
+                      if (this.roomName.length <= 20) {
+                        User user = await signIn();
+                        int pin = await DatabaseService(uid: user.uid).updateRoomManager(this.roomName);
+                        Wakelock.enable();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                //TODO given password, get room name
+                                builder: (context) => TeacherRoom(user, this.roomName, pin)));
+                      } else {
+                        setState(() => this.errorText = "Room name should be 20 character at most");
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.deepPurple[900],

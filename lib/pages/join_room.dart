@@ -10,8 +10,9 @@ class JoinRoom extends StatefulWidget {
 }
 
 class _JoinRoomState extends State<JoinRoom> {
+  String invalidPassword = "";
   final myController = TextEditingController();
-  int pin = 0;
+  String pin = "";
   final AuthService _auth = AuthService();
 
   @override
@@ -34,12 +35,14 @@ class _JoinRoomState extends State<JoinRoom> {
                 child: TextField(
                   controller: myController,
                   onChanged: (text) {
-                    this.pin = int.parse(text);
+                    this.pin = text;
+                    setState(() => invalidPassword = "");
                   },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    // border: OutlineInputBorder(),
                     hintText: 'Enter room pin',
+                    errorText: invalidPassword,
                   ),
                 ),
               ),
@@ -52,16 +55,25 @@ class _JoinRoomState extends State<JoinRoom> {
                 child: ElevatedButton(
                   onPressed: () async {
                     User user = await signIn();
-                    bool joined = await DatabaseService(uid: user.uid).updateRooms(this.pin, 10);
-                    if (joined) {
-                      String roomName = await DatabaseService(uid: user.uid).getRoomName(this.pin);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              //TODO given password, get room name
-                              builder: (context) => Room(user, roomName, this.pin)));
+                    if (!this.isNumeric(this.pin)) {
+                      setState(() => invalidPassword = "Password should contain digits only");
+                    } else if (this.pin.length != 6) {
+                      setState(() => invalidPassword = "Password should be 6 digits");
                     } else {
-                      _showMyDialog(context);
+                      bool joined = await DatabaseService(uid: user.uid).updateRooms(int.parse(this.pin), 10);
+                      if (joined) {
+                        setState(() => invalidPassword = "");
+                        String roomName =
+                            await DatabaseService(uid: user.uid).getRoomName(int.parse(this.pin));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                // given password, get room name
+                                builder: (context) => Room(user, roomName, int.parse(this.pin))));
+                      } else {
+                        setState(() => invalidPassword = "Invalid password");
+                        // _showMyDialog(context);
+                      }
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -81,6 +93,13 @@ class _JoinRoomState extends State<JoinRoom> {
         ),
       ),
     );
+  }
+
+  bool isNumeric(String s) {
+    if (s == null) {
+      return false;
+    }
+    return int.tryParse(s) != null;
   }
 
   Future signIn() async {
