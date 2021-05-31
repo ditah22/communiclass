@@ -52,7 +52,7 @@ class _OpenRoomState extends State<OpenRoom> {
                   height: 50.0,
                   child: ElevatedButton(
                     onPressed: () async {
-                      if (this.roomName.length <= 20) {
+                      if (this.roomName.length <= 13) {
                         User user = await signIn();
                         int pin = await DatabaseService(uid: user.uid).updateRoomManager(this.roomName);
                         Wakelock.enable();
